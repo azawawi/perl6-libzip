@@ -6,6 +6,18 @@ use NativeCall;
 
 constant LIB = 'libzip.so';
 
+## Constants
+
+# Create the archive if it does not exist.
+constant ZIP_CREATE = 1;
+
+# Error if archive already exists.
+constant ZIP_EXCL = 2;
+
+# Perform additional stricter consistency checks on the archive, and error if
+# they fail.
+constant ZIP_CHECKCONS = 4;
+
 ## Enumerations
 # == /usr/include/zip.h ==
 
@@ -385,6 +397,30 @@ LibZip - Perl 6 bindings for libzip
 =head1 DESCRIPTION
 
 LibZip provides Perl 6 bindings for L<libzip|http://www.nih.at/libzip/libzip.html>.
+
+=head1 INSTALLATION
+
+    sudo apt-get install libzip-dev
+
+=head1 FUNCTIONS
+
+=head2 zip_open
+
+zip_t* zip_open(const char *path, int flags, int *errorp);
+
+L<http://www.nih.at/libzip/zip_open.html>
+
+=head2 zip_close
+
+int zip_close(zip_t *archive);
+
+L<http://www.nih.at/libzip/zip_close.html>
+
+=head1 HACKING
+
+    panda install App::GPTrixie
+    gptrixie --all /usr/include/zip.h > zip-generated.pl6
+    atom /usr/include/zip.h
 
 =head1 AUTHOR
 
