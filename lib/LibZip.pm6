@@ -4,10 +4,14 @@ unit module LibZip;
 
 use NativeCall;
 
-constant LIB = 'libzip.so';
-
-
 ## Constants
+
+# Shared library (.so) or Dynamic-linked library (.dll) name
+constant LIB =  'libzip.so';
+
+#
+# flags for zip_open
+#
 # Create the archive if it does not exist.
 constant ZIP_CREATE   is export = 1;
 
@@ -17,6 +21,155 @@ constant ZIP_EXCL     is export = 2;
 # Perform additional stricter consistency checks on the archive, and error if
 # they fail.
 constant ZIP_CHECKCONS is export = 4;
+
+#
+# flags for zip_name_locate, zip_fopen, zip_stat, ...
+#
+#  ignore case on name lookup 
+constant ZIP_FL_NOCASE is export =  1;
+#  ignore directory component 
+constant ZIP_FL_NODIR is export =  2;
+#  read compressed data 
+constant ZIP_FL_COMPRESSED is export =  4;
+#  use original data, ignoring changes 
+constant ZIP_FL_UNCHANGED is export =  8;
+# Force recompression of data
+constant ZIP_FL_RECOMPRESS is export =  16;
+# read encrypted data (implies ZIP_FL_COMPRESSED)
+constant ZIP_FL_ENCRYPTED is export =  32;
+
+#
+# archive global flags flags
+#
+constant ZIP_AFL_TORRENT is export =  1; #  torrent zipped 
+constant ZIP_AFL_RDONLY is export =  2; #  read only -- cannot be cleared 
+
+#
+# flags for compression and encryption sources
+#
+constant ZIP_CODEC_ENCODE is export =  1; #  compress/encrypt 
+
+#
+# libzip error codes
+#
+#  N No error 
+constant ZIP_ER_OK is export =  0;
+#  N Multi-disk zip archives not supported 
+constant ZIP_ER_MULTIDISK is export =  1;
+#  S Renaming temporary file failed 
+constant ZIP_ER_RENAME is export =  2;
+#  S Closing zip archive failed 
+constant ZIP_ER_CLOSE is export =  3;
+#  S Seek error 
+constant ZIP_ER_SEEK is export =  4;
+#  S Read error 
+constant ZIP_ER_READ is export =  5;
+#  S Write error 
+constant ZIP_ER_WRITE is export =  6;
+#  N CRC error 
+constant ZIP_ER_CRC is export =  7;
+#  N Containing zip archive was closed 
+constant ZIP_ER_ZIPCLOSED is export =  8;
+#  N No such file 
+constant ZIP_ER_NOENT is export =  9;
+#  N File already exists 
+constant ZIP_ER_EXISTS is export =  10;
+#  S Can't open file 
+constant ZIP_ER_OPEN is export =  11;
+#  S Failure to create temporary file 
+constant ZIP_ER_TMPOPEN is export =  12;
+#  Z Zlib error 
+constant ZIP_ER_ZLIB is export =  13;
+#  N Malloc failure 
+constant ZIP_ER_MEMORY is export =  14;
+#  N Entry has been changed 
+constant ZIP_ER_CHANGED is export =  15;
+#  N Compression method not supported 
+constant ZIP_ER_COMPNOTSUPP is export =  16;
+#  N Premature EOF 
+constant ZIP_ER_EOF is export =  17;
+#  N Invalid argument 
+constant ZIP_ER_INVAL is export =  18;
+#  N Not a zip archive 
+constant ZIP_ER_NOZIP is export =  19;
+#  N Internal error 
+constant ZIP_ER_INTERNAL is export =  20;
+#  N Zip archive inconsistent 
+constant ZIP_ER_INCONS is export =  21;
+#  S Can't remove file 
+constant ZIP_ER_REMOVE is export =  22;
+#  N Entry has been deleted 
+constant ZIP_ER_DELETED is export =  23;
+#  N Encryption method not supported 
+constant ZIP_ER_ENCRNOTSUPP is export =  24;
+#  N Read-only archive 
+constant ZIP_ER_RDONLY is export =  25; 
+#  N No password provided 
+constant ZIP_ER_NOPASSWD is export =  26;
+#  N Wrong password provided 
+constant ZIP_ER_WRONGPASSWD is export =  27;
+
+#
+# type of system error value
+#
+#  sys_err unused 
+constant ZIP_ET_NONE is export =  0;
+#  sys_err is errno 
+constant ZIP_ET_SYS is export =  1;
+#  sys_err is zlib error code 
+constant ZIP_ET_ZLIB is export =  2;
+
+#
+# compression methods
+#
+# better of deflate or store
+constant ZIP_CM_DEFAULT is export =  -1;
+#  stored (uncompressed) 
+constant ZIP_CM_STORE is export =  0;
+#  shrunk 
+constant ZIP_CM_SHRINK is export =  1;
+#  reduced with factor 1 
+constant ZIP_CM_REDUCE_1 is export =  2;
+#  reduced with factor 2 
+constant ZIP_CM_REDUCE_2 is export =  3;
+#  reduced with factor 3 
+constant ZIP_CM_REDUCE_3 is export =  4;
+#  reduced with factor 4 
+constant ZIP_CM_REDUCE_4 is export =  5;
+#  imploded 
+constant ZIP_CM_IMPLODE is export =  6;
+# 7 - Reserved for Tokenizing compression algorithm
+#  deflated 
+constant ZIP_CM_DEFLATE is export =  8;
+#  deflate64 
+constant ZIP_CM_DEFLATE64 is export =  9;
+#  PKWARE imploding 
+constant ZIP_CM_PKWARE_IMPLODE is export =  10;
+# 11 - Reserved by PKWARE
+#  compressed using BZIP2 algorithm 
+constant ZIP_CM_BZIP2 is export =  12;
+# 13 - Reserved by PKWARE
+#  LZMA (EFS) 
+constant ZIP_CM_LZMA is export =  14;
+# 15-17 - Reserved by PKWARE
+#  compressed using IBM TERSE (new) 
+constant ZIP_CM_TERSE is export =  18;
+#  IBM LZ77 z Architecture (PFS) 
+constant ZIP_CM_LZ77 is export =  19;
+#  WavPack compressed data 
+constant ZIP_CM_WAVPACK is export =  97;
+#  PPMd version I, Rev 1 
+constant ZIP_CM_PPMD is export =  98;
+
+#
+# encryption methods
+#
+#  not encrypted 
+constant ZIP_EM_NONE is export =  0;
+#  traditional PKWARE encryption 
+constant ZIP_EM_TRAD_PKWARE is export =  1;
+# unknown algorithm
+constant ZIP_EM_UNKNOWN is export =  0xffff;
 
 ## Enumerations
 # == /usr/include/zip.h ==
