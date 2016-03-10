@@ -257,8 +257,8 @@ sub zip_error_clear(Pointer[zip]  # zip*
 #
 #ZIP_EXTERN void zip_error_get(struct zip *, int *, int *);
 sub zip_error_get(Pointer[zip]                   # zip*
-                 ,Pointer[int32]                 # int*
-                 ,Pointer[int32]                 # int*
+                 ,CArray[int32]                  # int*
+                 ,CArray[int32]                  # int*
                   ) is native(LIB)  is export { * }
 
 #
@@ -463,7 +463,7 @@ sub zip_set_file_extra(Pointer[zip]                   # zip*
 #ZIP_EXTERN struct zip_source *zip_source_buffer(struct zip *, const void *,
 #						zip_int64, int);
 sub zip_source_buffer(Pointer[zip]                   # zip*
-                     ,Pointer                        # const void*
+                     ,CArray[int8]                   # const void*
                      ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                      ,int32                          # int
                       ) is native(LIB) returns Pointer[zip_source] is export { * }
