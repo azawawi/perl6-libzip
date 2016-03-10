@@ -6,32 +6,16 @@ use lib 'lib';
 use NativeCall;
 use LibZip;
 
-constant LIB = 'libzip.so';
-
-
-class ZipFile {
-  has Pointer[zip] $.archive;
-
-  #open("", :$w)
-}
+my $ret;
 
 my $errorp;
 my Pointer[zip] $handle = zip_open("test.zip", ZIP_CREATE, $errorp);
-say $handle;
-say $errorp;
+die "Failed: $errorp!" unless $handle;
 
+my $filename = "README.md";
+my $source = zip_source_file($handle, $filename, 0, -1);
 
-my $data= "Hello world";
-say $data.chars;
-my  $source = zip_source_buffer($handle, $data, $data.chars, 0);
-say $source;
-
-=begin code
-my $ret;
-$ret = zip_add($handle, "lib", $source);
-
-say $ret;
+$ret = zip_add($handle, $filename.IO.basename, $source);
 
 $ret = zip_close($handle);
 say $ret;
-=end code
