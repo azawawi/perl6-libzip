@@ -22,7 +22,6 @@ die "Failed!" unless $source;
 
 # Add file to zip archive
 my $result = zip_add($handle, $filename.IO.basename, $source);
-say $result;
 die "Failed" if $result == -1;
 
 # Close the zip archive
