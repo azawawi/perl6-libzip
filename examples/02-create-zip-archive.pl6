@@ -3,20 +3,26 @@
 use v6;
 
 use lib 'lib';
-use NativeCall;
-use LibZip::NativeCall;
+use LibZip;
 
 # Remove the old one (just in case)
 my $zip-file-name = "test.zip";
 $zip-file-name.IO.unlink;
 
-# Create a new zip file
-my $error-code;
-my Pointer[zip] $archive = zip_open($zip-file-name, ZIP_CREATE, $error-code);
-die "Failed: $error-code!" unless $archive;
+my $archive = LibZip.new;
 
-# Prepare a zip data source from an existing file
-my $filename = "README.md";
+# Create a new zip file
+$archive.open($zip-file-name);
+
+# Add file to zip archive
+#$archive.add-file("README.md");
+
+# Add file to zip archive
+#$archive.add-buffer(@buffer);
+
+=begin ignore
+
+
 my $file-data-source = zip_source_file($archive, $filename, 0, -1);
 die "Failed!" unless $file-data-source;
 
@@ -44,3 +50,4 @@ die "Failed" if $result == -1;
 # Close the zip archive
 $result = zip_close($archive);
 die "Failed" if $result != ZIP_ER_OK;
+=end ignore
