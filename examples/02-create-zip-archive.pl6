@@ -12,8 +12,17 @@ $zip-file-name.IO.unlink;
 # Create a new LibZip instance
 my $archive = LibZip.new;
 
-# Create a new zip file
-$archive.open($zip-file-name);
+{
+  # Create a new zip file
+  $archive.open($zip-file-name);
+
+  CATCH {
+    when X::TypeCheck {
+      die sprintf("Expected: %s, Got: %s", $_.expected.perl, $_.got.perl);
+    }
+  }
+}
+
 
 # Add file to zip archive
 $archive.add-file("README.md");
