@@ -5,53 +5,50 @@ unit class LibZip;
 use NativeCall;
 use LibZip::NativeCall;
 
-class LibZip {
-  has Pointer[zip] $.archive;
+has Pointer[zip] $.archive is rw;
 
-  method open(Str $file-name) {
-    my $error-code;
-    my Pointer[zip] $archive = zip_open($file-name, ZIP_CREATE, $error-code);
-    die "Failed: $error-code!" unless $archive;
-    $.archive = $archive;
+method open(Str $file-name) {
+  my $error-code;
+  my Pointer[zip] $archive = zip_open($file-name, ZIP_CREATE, $error-code);
+  die "Failed: $error-code!" unless $archive;
+  $.archive = $archive;
+}
+
+method add-file(Str $file-name) {
+  die "No open zip archive" unless $.archive;
+  my $file-data-source = zip_source_file($.archive, $file-name, 0, -1);
+  die "Failed!" unless $file-data-source;
+  my $result = zip_add($.archive, $file-name.IO.basename, $file-data-source);
+  die "Failed while adding to zip archive" if $result == -1;
+}
+
+method add-buffer(Str $file-name, @buffer) {
+  die "No open zip archive" unless $.archive;
+
+  # Prepare a zip data source from memory buffer
+  my @data := CArray[int8].new;
+  for @buffer -> $item {
+    @data.push($item);
+  }
+  my $memory-data-source = zip_source_buffer($.archive, @data, @data.elems, 0);
+  unless $memory-data-source {
+    my $error-code        = CArray[int32].new;
+    my $system-error-code = CArray[int32].new;
+    zip_error_get($.archive, $error-code, $system-error-code);
+    die "Failed with the following error code: $($error-code[0]) and system error code: $($system-error-code[0])";
   }
 
-  method add-file(Str $file-name) {
-    die "No open zip archive" unless $.archive;
-    my $file-data-source = zip_source_file($.archive, $file-name, 0, -1);
-    die "Failed!" unless $file-data-source;
-    my $result = zip_add($.archive, $file-name.IO.basename, $file-data-source);
-    die "Failed while adding to zip archive" if $result == -1;
-  }
+  # Add memory data source to zip archive
+  my $result = zip_add($.archive, $file-name, $memory-data-source);
+  die "Failed" if $result == -1;
+}
 
-  method add-buffer(Str $file-name, @buffer) {
-    die "No open zip archive" unless $.archive;
+method close {
+  die "No open zip archive" unless $.archive;
 
-    # Prepare a zip data source from memory buffer
-    my @data := CArray[int8].new;
-    for @buffer -> $item {
-      @data.push($item);
-    }
-    my $memory-data-source = zip_source_buffer($.archive, @data, @data.elems, 0);
-    unless $memory-data-source {
-      my $error-code        = CArray[int32].new;
-      my $system-error-code = CArray[int32].new;
-      zip_error_get($.archive, $error-code, $system-error-code);
-      die "Failed with the following error code: $($error-code[0]) and system error code: $($system-error-code[0])";
-    }
-
-    # Add memory data source to zip archive
-    my $result = zip_add($.archive, $file-name, $memory-data-source);
-    die "Failed" if $result == -1;
-  }
-
-  method close {
-    die "No open zip archive" unless $.archive;
-
-    # Close the zip archive
-    my $result = zip_close($.archive);
-    die "Failed" if $result != ZIP_ER_OK;
-  }
-
+  # Close the zip archive
+  my $result = zip_close($.archive);
+  die "Failed" if $result != ZIP_ER_OK;
 }
 
 =begin pod
@@ -75,6 +72,14 @@ LibZip provides Perl 6 bindings for L<libzip|http://www.nih.at/libzip/libzip.htm
 =head1 METHODS
 
 =head2 open
+
+TODO document
+
+=head2 add-file
+
+TODO document
+
+=head2 add-buffer
 
 TODO document
 

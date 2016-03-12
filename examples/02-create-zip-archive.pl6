@@ -19,7 +19,7 @@ $archive.open($zip-file-name);
 $archive.add-file("README.md");
 
 # Add file to zip archive
-my @buffer;
+my @buffer = "Hello world";
 $archive.add-buffer("Hello.txt", @buffer);
 
 # Close the zip archive
