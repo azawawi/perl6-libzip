@@ -3,13 +3,15 @@ use v6;
 unit class LibZip;
 
 use NativeCall;
+use NativeHelpers::Blob;
 use LibZip::NativeCall;
 
-has Pointer[zip] $.archive is rw;
+# TODO Pointer[zip] is not working at the moment (NYI as of rakudo 2016.02)
+has Pointer $.archive is rw;
 
 method open(Str $file-name) {
   my $error-code;
-  my Pointer[zip] $archive = zip_open($file-name, ZIP_CREATE, $error-code);
+  my Pointer $archive = zip_open($file-name, ZIP_CREATE, $error-code);
   die "Failed: $error-code!" unless $archive;
   $.archive = $archive;
 }
@@ -22,15 +24,12 @@ method add-file(Str $file-name) {
   die "Failed while adding to zip archive" if $result == -1;
 }
 
-method add-buffer(Str $file-name, @buffer) {
+method add-blob(Str $file-name, Blob $blob) {
   die "No open zip archive" unless $.archive;
 
   # Prepare a zip data source from memory buffer
-  my @data := CArray[int8].new;
-  for @buffer -> $item {
-    @data.push($item);
-  }
-  my $memory-data-source = zip_source_buffer($.archive, @data, @data.elems, 0);
+  my $data = carray-from-blob($blob);
+  my $memory-data-source = zip_source_buffer($.archive, $data, $blob.elems, 0);
   unless $memory-data-source {
     my $error-code        = CArray[int32].new;
     my $system-error-code = CArray[int32].new;
