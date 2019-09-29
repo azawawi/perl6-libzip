@@ -8,12 +8,12 @@ install:
   - SET PATH=C:\strawberry\c\bin;C:\strawberry\perl\site\bin;C:\strawberry\perl\bin;%PATH%
   - git clone https://github.com/tadzik/rakudobrew %USERPROFILE%\rakudobrew
   - SET PATH=%USERPROFILE%\rakudobrew\bin;%PATH%
-  # Build rakudo latest
-  - rakudobrew build moar
+  # Install rakudostar for faster CI builds. No windows user will actually use
+  # rakudobrew
+  - choco install rakudostar
   # Refresh environment variables so zef works
   - refreshenv
-  # Install zef package manager
-  - rakudobrew build zef
+  # And let us start testing...
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build: off
