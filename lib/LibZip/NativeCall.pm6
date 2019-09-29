@@ -26,13 +26,13 @@ constant ZIP_CHECKCONS is export = 4;
 #
 # flags for zip_name_locate, zip_fopen, zip_stat, ...
 #
-#  ignore case on name lookup 
+#  ignore case on name lookup
 constant ZIP_FL_NOCASE is export =  1;
-#  ignore directory component 
+#  ignore directory component
 constant ZIP_FL_NODIR is export =  2;
-#  read compressed data 
+#  read compressed data
 constant ZIP_FL_COMPRESSED is export =  4;
-#  use original data, ignoring changes 
+#  use original data, ignoring changes
 constant ZIP_FL_UNCHANGED is export =  8;
 # Force recompression of data
 constant ZIP_FL_RECOMPRESS is export =  16;
@@ -42,82 +42,82 @@ constant ZIP_FL_ENCRYPTED is export =  32;
 #
 # archive global flags flags
 #
-constant ZIP_AFL_TORRENT is export =  1; #  torrent zipped 
-constant ZIP_AFL_RDONLY is export =  2; #  read only -- cannot be cleared 
+constant ZIP_AFL_TORRENT is export =  1; #  torrent zipped
+constant ZIP_AFL_RDONLY is export =  2; #  read only -- cannot be cleared
 
 #
 # flags for compression and encryption sources
 #
-constant ZIP_CODEC_ENCODE is export =  1; #  compress/encrypt 
+constant ZIP_CODEC_ENCODE is export =  1; #  compress/encrypt
 
 #
 # libzip error codes
 #
-#  N No error 
+#  N No error
 constant ZIP_ER_OK is export =  0;
-#  N Multi-disk zip archives not supported 
+#  N Multi-disk zip archives not supported
 constant ZIP_ER_MULTIDISK is export =  1;
-#  S Renaming temporary file failed 
+#  S Renaming temporary file failed
 constant ZIP_ER_RENAME is export =  2;
-#  S Closing zip archive failed 
+#  S Closing zip archive failed
 constant ZIP_ER_CLOSE is export =  3;
-#  S Seek error 
+#  S Seek error
 constant ZIP_ER_SEEK is export =  4;
-#  S Read error 
+#  S Read error
 constant ZIP_ER_READ is export =  5;
-#  S Write error 
+#  S Write error
 constant ZIP_ER_WRITE is export =  6;
-#  N CRC error 
+#  N CRC error
 constant ZIP_ER_CRC is export =  7;
-#  N Containing zip archive was closed 
+#  N Containing zip archive was closed
 constant ZIP_ER_ZIPCLOSED is export =  8;
-#  N No such file 
+#  N No such file
 constant ZIP_ER_NOENT is export =  9;
-#  N File already exists 
+#  N File already exists
 constant ZIP_ER_EXISTS is export =  10;
-#  S Can't open file 
+#  S Can't open file
 constant ZIP_ER_OPEN is export =  11;
-#  S Failure to create temporary file 
+#  S Failure to create temporary file
 constant ZIP_ER_TMPOPEN is export =  12;
-#  Z Zlib error 
+#  Z Zlib error
 constant ZIP_ER_ZLIB is export =  13;
-#  N Malloc failure 
+#  N Malloc failure
 constant ZIP_ER_MEMORY is export =  14;
-#  N Entry has been changed 
+#  N Entry has been changed
 constant ZIP_ER_CHANGED is export =  15;
-#  N Compression method not supported 
+#  N Compression method not supported
 constant ZIP_ER_COMPNOTSUPP is export =  16;
-#  N Premature EOF 
+#  N Premature EOF
 constant ZIP_ER_EOF is export =  17;
-#  N Invalid argument 
+#  N Invalid argument
 constant ZIP_ER_INVAL is export =  18;
-#  N Not a zip archive 
+#  N Not a zip archive
 constant ZIP_ER_NOZIP is export =  19;
-#  N Internal error 
+#  N Internal error
 constant ZIP_ER_INTERNAL is export =  20;
-#  N Zip archive inconsistent 
+#  N Zip archive inconsistent
 constant ZIP_ER_INCONS is export =  21;
-#  S Can't remove file 
+#  S Can't remove file
 constant ZIP_ER_REMOVE is export =  22;
-#  N Entry has been deleted 
+#  N Entry has been deleted
 constant ZIP_ER_DELETED is export =  23;
-#  N Encryption method not supported 
+#  N Encryption method not supported
 constant ZIP_ER_ENCRNOTSUPP is export =  24;
-#  N Read-only archive 
-constant ZIP_ER_RDONLY is export =  25; 
-#  N No password provided 
+#  N Read-only archive
+constant ZIP_ER_RDONLY is export =  25;
+#  N No password provided
 constant ZIP_ER_NOPASSWD is export =  26;
-#  N Wrong password provided 
+#  N Wrong password provided
 constant ZIP_ER_WRONGPASSWD is export =  27;
 
 #
 # type of system error value
 #
-#  sys_err unused 
+#  sys_err unused
 constant ZIP_ET_NONE is export =  0;
-#  sys_err is errno 
+#  sys_err is errno
 constant ZIP_ET_SYS is export =  1;
-#  sys_err is zlib error code 
+#  sys_err is zlib error code
 constant ZIP_ET_ZLIB is export =  2;
 
 #
@@ -125,49 +125,49 @@ constant ZIP_ET_ZLIB is export =  2;
 #
 # better of deflate or store
 constant ZIP_CM_DEFAULT is export =  -1;
-#  stored (uncompressed) 
+#  stored (uncompressed)
 constant ZIP_CM_STORE is export =  0;
-#  shrunk 
+#  shrunk
 constant ZIP_CM_SHRINK is export =  1;
-#  reduced with factor 1 
+#  reduced with factor 1
 constant ZIP_CM_REDUCE_1 is export =  2;
-#  reduced with factor 2 
+#  reduced with factor 2
 constant ZIP_CM_REDUCE_2 is export =  3;
-#  reduced with factor 3 
+#  reduced with factor 3
 constant ZIP_CM_REDUCE_3 is export =  4;
-#  reduced with factor 4 
+#  reduced with factor 4
 constant ZIP_CM_REDUCE_4 is export =  5;
-#  imploded 
+#  imploded
 constant ZIP_CM_IMPLODE is export =  6;
 # 7 - Reserved for Tokenizing compression algorithm
-#  deflated 
+#  deflated
 constant ZIP_CM_DEFLATE is export =  8;
-#  deflate64 
+#  deflate64
 constant ZIP_CM_DEFLATE64 is export =  9;
-#  PKWARE imploding 
+#  PKWARE imploding
 constant ZIP_CM_PKWARE_IMPLODE is export =  10;
 # 11 - Reserved by PKWARE
-#  compressed using BZIP2 algorithm 
+#  compressed using BZIP2 algorithm
 constant ZIP_CM_BZIP2 is export =  12;
 # 13 - Reserved by PKWARE
-#  LZMA (EFS) 
+#  LZMA (EFS)
 constant ZIP_CM_LZMA is export =  14;
 # 15-17 - Reserved by PKWARE
-#  compressed using IBM TERSE (new) 
+#  compressed using IBM TERSE (new)
 constant ZIP_CM_TERSE is export =  18;
-#  IBM LZ77 z Architecture (PFS) 
+#  IBM LZ77 z Architecture (PFS)
 constant ZIP_CM_LZ77 is export =  19;
-#  WavPack compressed data 
+#  WavPack compressed data
 constant ZIP_CM_WAVPACK is export =  97;
-#  PPMd version I, Rev 1 
+#  PPMd version I, Rev 1
 constant ZIP_CM_PPMD is export =  98;
 
 #
 # encryption methods
 #
-#  not encrypted 
+#  not encrypted
 constant ZIP_EM_NONE is export =  0;
-#  traditional PKWARE encryption 
+#  traditional PKWARE encryption
 constant ZIP_EM_TRAD_PKWARE is export =  1;
 # unknown algorithm
 constant ZIP_EM_UNKNOWN is export =  0xffff;
@@ -219,45 +219,45 @@ class zip_stat is repr('CStruct') is export {
   has uint32 $.flags;
 }
 
-class zip is repr('CStruct') is export { }
-class zip_file is repr('CStruct') is export { }
-class zip_source is repr('CStruct') is export { }
+class zip        is repr('CPointer') is export { }
+class zip_file   is repr('CPointer') is export { }
+class zip_source is repr('CPointer') is export { }
 
 
 ## Functions
 
 #
 #ZIP_EXTERN zip_int64_t zip_add(struct zip *, const char *, struct zip_source *);
-sub zip_add(Pointer[zip]                   # zip*
+sub zip_add(zip                   # zip*
            ,Str                            # const char*
-           ,Pointer[zip_source]            # zip_source*
+           ,zip_source            # zip_source*
             ) is native(LIB) returns int64 is export { * }
 
 #
 #ZIP_EXTERN zip_int64_t zip_add_dir(struct zip *, const char *);
-sub zip_add_dir(Pointer[zip]                   # zip*
+sub zip_add_dir(zip                   # zip*
                ,Str                            # const char*
                 ) is native(LIB) returns int64 is export { * }
 
 #
 #ZIP_EXTERN int zip_close(struct zip *);
-sub zip_close(Pointer[zip]  # zip*
+sub zip_close(zip  # zip*
               ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_delete(struct zip *, zip_int64);
-sub zip_delete(Pointer[zip]                   # zip*
+sub zip_delete(zip                   # zip*
               ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN void zip_error_clear(struct zip *);
-sub zip_error_clear(Pointer[zip]  # zip*
+sub zip_error_clear(zip  # zip*
                     ) is native(LIB)  is export { * }
 
 #
 #ZIP_EXTERN void zip_error_get(struct zip *, int *, int *);
-sub zip_error_get(Pointer[zip]                   # zip*
+sub zip_error_get(zip                   # zip*
                  ,CArray[int32]                  # int*
                  ,CArray[int32]                  # int*
                   ) is native(LIB)  is export { * }
@@ -277,7 +277,7 @@ sub zip_error_to_str(Str                            # char*
 
 #
 #ZIP_EXTERN int zip_fclose(struct zip_file *);
-sub zip_fclose(Pointer[zip_file]  # zip_file*
+sub zip_fclose(zip_file  # zip_file*
                ) is native(LIB) returns int32 is export { * }
 
 #
@@ -285,75 +285,75 @@ sub zip_fclose(Pointer[zip_file]  # zip_file*
 sub zip_fdopen(int32                          # int
               ,int32                          # int
               ,Pointer[int32]                 # int*
-               ) is native(LIB) returns Pointer[zip] is export { * }
+               ) is native(LIB) returns zip is export { * }
 
 #
 #ZIP_EXTERN void zip_file_error_clear(struct zip_file *);
-sub zip_file_error_clear(Pointer[zip_file]  # zip_file*
+sub zip_file_error_clear(zip_file  # zip_file*
                          ) is native(LIB)  is export { * }
 
 #
 #ZIP_EXTERN void zip_file_error_get(struct zip_file *, int *, int *);
-sub zip_file_error_get(Pointer[zip_file]              # zip_file*
+sub zip_file_error_get(zip_file              # zip_file*
                       ,Pointer[int32]                 # int*
                       ,Pointer[int32]                 # int*
                        ) is native(LIB)  is export { * }
 
 #
 #ZIP_EXTERN const char *zip_file_strerror(struct zip_file *);
-sub zip_file_strerror(Pointer[zip_file]  # zip_file*
+sub zip_file_strerror(zip_file  # zip_file*
                       ) is native(LIB) returns Str is export { * }
 
 #
 #ZIP_EXTERN struct zip_file *zip_fopen(struct zip *, const char *, int);
-sub zip_fopen(Pointer[zip]                   # zip*
+sub zip_fopen(zip                   # zip*
              ,Str                            # const char*
              ,int32                          # int
-              ) is native(LIB) returns Pointer[zip_file] is export { * }
+              ) is native(LIB) returns zip_file is export { * }
 
 #
 #ZIP_EXTERN struct zip_file *zip_fopen_encrypted(struct zip *, const char *,
 #						int, const char *);
-sub zip_fopen_encrypted(Pointer[zip]                   # zip*
+sub zip_fopen_encrypted(zip                   # zip*
                        ,Str                            # const char*
                        ,int32                          # int
                        ,Str                            # const char*
-                        ) is native(LIB) returns Pointer[zip_file] is export { * }
+                        ) is native(LIB) returns zip_file is export { * }
 
 #
 #ZIP_EXTERN struct zip_file *zip_fopen_index(struct zip *, zip_int64, int);
-sub zip_fopen_index(Pointer[zip]                   # zip*
+sub zip_fopen_index(zip                   # zip*
                    ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                    ,int32                          # int
-                    ) is native(LIB) returns Pointer[zip_file] is export { * }
+                    ) is native(LIB) returns zip_file is export { * }
 
 #
 #ZIP_EXTERN struct zip_file *zip_fopen_index_encrypted(struct zip *,
 #						      zip_int64, int,
 #						      const char *);
-sub zip_fopen_index_encrypted(Pointer[zip]                   # zip*
+sub zip_fopen_index_encrypted(zip                   # zip*
                              ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                              ,int32                          # int
                              ,Str                            # const char*
-                              ) is native(LIB) returns Pointer[zip_file] is export { * }
+                              ) is native(LIB) returns zip_file is export { * }
 
 #
 #ZIP_EXTERN zip_int64_t zip_fread(struct zip_file *, void *, zip_int64);
-sub zip_fread(Pointer[zip_file]              # zip_file*
+sub zip_fread(zip_file              # zip_file*
              ,Pointer                        # void*
              ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
               ) is native(LIB) returns int64 is export { * }
 
 #
 #ZIP_EXTERN const char *zip_get_archive_comment(struct zip *, int *, int);
-sub zip_get_archive_comment(Pointer[zip]                   # zip*
+sub zip_get_archive_comment(zip                   # zip*
                            ,Pointer[int32]                 # int*
                            ,int32                          # int
                             ) is native(LIB) returns Str is export { * }
 
 #
 #ZIP_EXTERN int zip_get_archive_flag(struct zip *, int, int);
-sub zip_get_archive_flag(Pointer[zip]                   # zip*
+sub zip_get_archive_flag(zip                   # zip*
                         ,int32                          # int
                         ,int32                          # int
                          ) is native(LIB) returns int32 is export { * }
@@ -361,7 +361,7 @@ sub zip_get_archive_flag(Pointer[zip]                   # zip*
 #
 #ZIP_EXTERN const char *zip_get_file_comment(struct zip *, zip_int64,
 #					    int *, int);
-sub zip_get_file_comment(Pointer[zip]                   # zip*
+sub zip_get_file_comment(zip                   # zip*
                         ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                         ,Pointer[int32]                 # int*
                         ,int32                          # int
@@ -370,7 +370,7 @@ sub zip_get_file_comment(Pointer[zip]                   # zip*
 #
 #ZIP_EXTERN const char *zip_get_file_extra(struct zip *, zip_int64,
 #					  int *, int);
-sub zip_get_file_extra(Pointer[zip]                   # zip*
+sub zip_get_file_extra(zip                   # zip*
                       ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                       ,Pointer[int32]                 # int*
                       ,int32                          # int
@@ -378,25 +378,25 @@ sub zip_get_file_extra(Pointer[zip]                   # zip*
 
 #
 #ZIP_EXTERN const char *zip_get_name(struct zip *, zip_int64, int);
-sub zip_get_name(Pointer[zip]                   # zip*
+sub zip_get_name(zip                   # zip*
                 ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                 ,int32                          # int
                  ) is native(LIB) returns Str is export { * }
 
 #
 #ZIP_EXTERN zip_int64 zip_get_num_entries(struct zip *, int);
-sub zip_get_num_entries(Pointer[zip]                   # zip*
+sub zip_get_num_entries(zip                   # zip*
                        ,int32                          # int
                         ) is native(LIB) returns int64 is export { * }
 
 #
 #ZIP_EXTERN int zip_get_num_files(struct zip *);  /* deprecated, use zip_get_num_entries instead */
-sub zip_get_num_files(Pointer[zip]  # zip*
+sub zip_get_num_files(zip  # zip*
                       ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_name_locate(struct zip *, const char *, int);
-sub zip_name_locate(Pointer[zip]                   # zip*
+sub zip_name_locate(zip                   # zip*
                    ,Str                            # const char*
                    ,int32                          # int
                     ) is native(LIB) returns int32 is export { * }
@@ -406,46 +406,46 @@ sub zip_name_locate(Pointer[zip]                   # zip*
 sub zip_open(Str                            # const char*
             ,int32                          # int
             ,Pointer[int32]                 # int*
-             ) is native(LIB) returns Pointer[zip] is export { * }
+             ) is native(LIB) returns zip is export { * }
 
 #
 #ZIP_EXTERN int zip_rename(struct zip *, zip_int64, const char *);
-sub zip_rename(Pointer[zip]                   # zip*
+sub zip_rename(zip                   # zip*
               ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
               ,Str                            # const char*
                ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_replace(struct zip *, zip_int64, struct zip_source *);
-sub zip_replace(Pointer[zip]                   # zip*
+sub zip_replace(zip                   # zip*
                ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
-               ,Pointer[zip_source]            # zip_source*
+               ,zip_source            # zip_source*
                 ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_set_archive_comment(struct zip *, const char *, int);
-sub zip_set_archive_comment(Pointer[zip]                   # zip*
+sub zip_set_archive_comment(zip                   # zip*
                            ,Str                            # const char*
                            ,int32                          # int
                             ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_set_archive_flag(struct zip *, int, int);
-sub zip_set_archive_flag(Pointer[zip]                   # zip*
+sub zip_set_archive_flag(zip                   # zip*
                         ,int32                          # int
                         ,int32                          # int
                          ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_set_default_password(struct zip *, const char *);
-sub zip_set_default_password(Pointer[zip]                   # zip*
+sub zip_set_default_password(zip                   # zip*
                             ,Str                            # const char*
                              ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_set_file_comment(struct zip *, zip_int64,
 #				    const char *, int);
-sub zip_set_file_comment(Pointer[zip]                   # zip*
+sub zip_set_file_comment(zip                   # zip*
                         ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                         ,Str                            # const char*
                         ,int32                          # int
@@ -454,7 +454,7 @@ sub zip_set_file_comment(Pointer[zip]                   # zip*
 #
 #ZIP_EXTERN int zip_set_file_extra(struct zip *, zip_int64,
 #				  const char *, int);
-sub zip_set_file_extra(Pointer[zip]                   # zip*
+sub zip_set_file_extra(zip                   # zip*
                       ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                       ,Str                            # const char*
                       ,int32                          # int
@@ -463,58 +463,58 @@ sub zip_set_file_extra(Pointer[zip]                   # zip*
 #
 #ZIP_EXTERN struct zip_source *zip_source_buffer(struct zip *, const void *,
 #						zip_int64, int);
-sub zip_source_buffer(Pointer[zip]                   # zip*
+sub zip_source_buffer(zip                   # zip*
                      ,CArray[uint8]                   # const void*
                      ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                      ,int32                          # int
-                      ) is native(LIB) returns Pointer[zip_source] is export { * }
+                      ) is native(LIB) returns zip_source is export { * }
 
 #
 #ZIP_EXTERN struct zip_source *zip_source_file(struct zip *, const char *,
 #					      zip_int64, zip_int64_t);
-sub zip_source_file(Pointer[zip]                   # zip*
+sub zip_source_file(zip                   # zip*
                    ,Str                            # const char*
                    ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                    ,int64                        # Typedef<zip_int64_t>->|Typedef<int64_t>->|long int||
-                    ) is native(LIB) returns Pointer[zip_source] is export { * }
+                    ) is native(LIB) returns zip_source is export { * }
 
 #
 #ZIP_EXTERN struct zip_source *zip_source_filep(struct zip *, FILE *,
 #					       zip_int64, zip_int64_t);
-#sub zip_source_filep(Pointer[zip]                   # zip*
+#sub zip_source_filep(zip                   # zip*
 #                    ,Pointer[_IO_FILE]              # Typedef<FILE>->|_IO_FILE|*
 #                    ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
 #                    ,int64_t                        # Typedef<zip_int64_t>->|Typedef<int64_t>->|long int||
-#                     ) is native(LIB) returns Pointer[zip_source] is export { * }
+#                     ) is native(LIB) returns zip_source is export { * }
 
 #
 #ZIP_EXTERN void zip_source_free(struct zip_source *);
-sub zip_source_free(Pointer[zip_source]  # zip_source*
+sub zip_source_free(zip_source  # zip_source*
                     ) is native(LIB)  is export { * }
 
 #
 #ZIP_EXTERN struct zip_source *zip_source_function(struct zip *,
 #						  zip_source_callback, void *);
-sub zip_source_function(Pointer[zip]                   # zip*
+sub zip_source_function(zip                   # zip*
                        ,& (Pointer, Pointer, int64, int32 --> int64) # Typedef<zip_source_callback>->|F:Typedef<zip_int64_t>->|Typedef<int64_t>->|long int|| ( void*, void*, Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||, zip_source_cmd)*|
                        ,Pointer                        # void*
-                        ) is native(LIB) returns Pointer[zip_source] is export { * }
+                        ) is native(LIB) returns zip_source is export { * }
 
 #
 #ZIP_EXTERN struct zip_source *zip_source_zip(struct zip *, struct zip *,
 #					     zip_int64, int,
 #					     zip_int64, zip_int64_t);
-sub zip_source_zip(Pointer[zip]                   # zip*
-                  ,Pointer[zip]                   # zip*
+sub zip_source_zip(zip                   # zip*
+                  ,zip                   # zip*
                   ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                   ,int32                          # int
                   ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                   ,int64                        # Typedef<zip_int64_t>->|Typedef<int64_t>->|long int||
-                   ) is native(LIB) returns Pointer[zip_source] is export { * }
+                   ) is native(LIB) returns zip_source is export { * }
 
 #
 #ZIP_EXTERN int zip_stat(struct zip *, const char *, int, struct zip_stat *);
-sub zip_stat(Pointer[zip]                   # zip*
+sub zip_stat(zip                   # zip*
             ,Str                            # const char*
             ,int32                          # int
             ,Pointer[zip_stat]              # zip_stat*
@@ -523,7 +523,7 @@ sub zip_stat(Pointer[zip]                   # zip*
 #
 #ZIP_EXTERN int zip_stat_index(struct zip *, zip_int64, int,
 #			      struct zip_stat *);
-sub zip_stat_index(Pointer[zip]                   # zip*
+sub zip_stat_index(zip                   # zip*
                   ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                   ,int32                          # int
                   ,Pointer[zip_stat]              # zip_stat*
@@ -536,23 +536,23 @@ sub zip_stat_init(Pointer[zip_stat]  # zip_stat*
 
 #
 #ZIP_EXTERN const char *zip_strerror(struct zip *);
-sub zip_strerror(Pointer[zip]  # zip*
+sub zip_strerror(zip  # zip*
                  ) is native(LIB) returns Str is export { * }
 
 #
 #ZIP_EXTERN int zip_unchange(struct zip *, zip_int64);
-sub zip_unchange(Pointer[zip]                   # zip*
+sub zip_unchange(zip                   # zip*
                 ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                  ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_unchange_all(struct zip *);
-sub zip_unchange_all(Pointer[zip]  # zip*
+sub zip_unchange_all(zip  # zip*
                      ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN int zip_unchange_archive(struct zip *);
-sub zip_unchange_archive(Pointer[zip]  # zip*
+sub zip_unchange_archive(zip  # zip*
                          ) is native(LIB) returns int32 is export { * }
 
 =begin pod
