@@ -340,7 +340,7 @@ sub zip_fopen_index_encrypted(zip                   # zip*
 #
 #ZIP_EXTERN zip_int64_t zip_fread(struct zip_file *, void *, zip_int64);
 sub zip_fread(zip_file              # zip_file*
-             ,Pointer                        # void*
+             ,Buf                        # void*
              ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
               ) is native(LIB) returns int64 is export { * }
 
@@ -517,7 +517,7 @@ sub zip_source_zip(zip                   # zip*
 sub zip_stat(zip                   # zip*
             ,Str                            # const char*
             ,int32                          # int
-            ,Pointer[zip_stat]              # zip_stat*
+            ,zip_stat              # zip_stat*
              ) is native(LIB) returns int32 is export { * }
 
 #
@@ -526,12 +526,12 @@ sub zip_stat(zip                   # zip*
 sub zip_stat_index(zip                   # zip*
                   ,int64                       # Typedef<zip_int64>->|Typedef<int64>->|long unsigned int||
                   ,int32                          # int
-                  ,Pointer[zip_stat]              # zip_stat*
+                  ,zip_stat              # zip_stat*
                    ) is native(LIB) returns int32 is export { * }
 
 #
 #ZIP_EXTERN void zip_stat_init(struct zip_stat *);
-sub zip_stat_init(Pointer[zip_stat]  # zip_stat*
+sub zip_stat_init(zip_stat  # zip_stat*
                   ) is native(LIB)  is export { * }
 
 #
