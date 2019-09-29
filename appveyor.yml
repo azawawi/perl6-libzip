@@ -8,14 +8,14 @@ install:
   - SET PATH=C:\strawberry\c\bin;C:\strawberry\perl\site\bin;C:\strawberry\perl\bin;%PATH%
   - git clone https://github.com/tadzik/rakudobrew %USERPROFILE%\rakudobrew
   - SET PATH=%USERPROFILE%\rakudobrew\bin;%PATH%
-  - rakudobrew build moar latest
-  - rakudobrew build panda
+  - rakudobrew build moar
+  - rakudobrew build zef
   - cd %APPVEYOR_BUILD_FOLDER%
-  - panda installdeps .
 
 build: off
 
 test_script:
-  - prove -v -e "perl6 -Ilib" t/
+  # Test for fun :)
+  - zef install . --verbose
 
 shallow_clone: true
